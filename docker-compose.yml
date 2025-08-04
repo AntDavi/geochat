@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    # ESCOLHA DE IMAGEM: rabbitmq:3.12-management inclui interface web
+    # Management UI permite monitoramento visual das filas e exchanges
+    image: rabbitmq:3.12-management
+    container_name: geochat-rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "5672:5672" # AMQP port - protocolo de messaging
+      - "15672:15672" # Management UI port - interface web
+    environment:
+      # CREDENCIAIS CUSTOMIZADAS: geochat/geochat123 ao invés do padrão guest/guest
+      # Importante: guest só funciona localhost, geochat funciona rede
+      RABBITMQ_DEFAULT_USER: geochat
+      RABBITMQ_DEFAULT_PASS: geochat123
+      RABBITMQ_DEFAULT_VHOST: /
+    volumes:
+      # PERSISTÊNCIA: Dados sobrevivem a restart do container
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - geochat-network
+    restart: unless-stopped
+    healthcheck:
+      # MONITORAMENTO: Verifica se RabbitMQ está respondendo
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+volumes:
+  rabbitmq_data:
+    # VOLUME NOMEADO: Dados persistem mesmo se container for removido
+    driver: local
+
+networks:
+  geochat-network:
+    # REDE DEDICADA: Isolamento e comunicação interna entre containers
+    driver: bridge
