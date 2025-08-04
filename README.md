@@ -90,7 +90,7 @@ Este script irá:
 - Testar configuração
 - Iniciar RabbitMQ via Docker
 
-## �📖 Como Usar (Manual)
+## ��� Como Usar (Manual)
 
 ### 1. Iniciando o RabbitMQ (Docker)
 
@@ -294,10 +294,13 @@ Este script verifica:
 - Padrões pub/sub e point-to-point
 - Tratamento de erros robusto
 
+## 👤 Autor
+Desenvolvido por Anthony Davi
+Aluno do curso de Engenharia de Computação – IFCE
+Disciplina: Programação Paralela e Distribuída (2025.1)
+Professor: Cidcley T. de Souza
+Contato: anthony.davi.sousa08@aluno.ifce.edu.br
+
 ## 🤝 Contribuição
 
 Este é um projeto educacional demonstrando integração de múltiplas tecnologias de comunicação em Python.
-
-## 📄 Licença
-
-Projeto educacional para demonstração de conceitos de programação distribuída.
